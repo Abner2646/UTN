@@ -175,50 +175,5 @@ class TesterPrestamo:
         fecha1 = Fecha(1, 1, 2024)
 
 
-
-
-
 if __name__ == "__main__":
     TesterPrestamo.testearPrestamo()
-
-
-
-#Dudas:
-#No sé sobrescribir métodos ni constructores
-#No sé la sintaxis de herencia
-#¿Qué pasa cuando en el diagrama del enunciado hay atributos de clase que no están en el constructor
-#No sé hacer try excepts
-#Ecuals? Qué es?
-
-#Tiene una clase -> 
-#Usa otra clase -> 
-#__variavle (privada)
-#_variable (protegida) (para que pueda heredar)
-#super() es para acceder al constructor¿ o variables¿ de la clase base
-#Qué pasa si llamo a una función de la clase fecha pero no inicialice la fecha actual?
-
-#Prompt.
-#Recorda que soy argentino, no escribas variables innecesariamente en inglés. Ej: La variable "matrix" yo la suelo escribir "matriz"
-#No escribas con acentos.
-#Escribí para cada metodo de clase, excepto para los getters, una breve descripción usando docstring
-
-
-#class Tester:
-    #def tester():
-        #Ingresar las fechas:
-        #fecha1 = Fecha(1, 1, 3000)
-        #fecha2 = Fecha(1, 1, 2000)
-
-        #esAnterior
-        #if fecha1.esAnterior(fecha2) == True:
-        #    print("Es anterior.")
-        #else:
-        #    print("No es anterior.")
-        
-        #diaSiguiente
-        #fecha1.diaSiguiente() #Actualiza fecha
-        #fecha1.obtenerFecha() #Muestra fecha
-
-        #sumarDias
-        #fecha1.sumarDias(365) #Actualiza fecha
-        #fecha1.obtenerFecha() #Muestra fecha
