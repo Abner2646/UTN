@@ -185,13 +185,3 @@ if __name__ == '__main__':
     Tester.testearColor()
 
 
-#HACER:
-#-Ir con la notebook con chat gpt iniciado en modo incógnito
-#-Ver cómo hago el grafico de tablas
-#-Pregunatar a Damian si vamos a tener que dibujar diagramas o solo código
-
-#SETTER: copiar(otroObjeto):
-#copia los atributos de otra instancia en esta
-
-#GETTER: clonar():
-#devuelve un objeto igual al self

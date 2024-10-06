@@ -11,7 +11,7 @@ class Especie:
         en caso contrario no modifican el valor del atributo'''
         try:
             # 1. Verifica si el valor es numérico
-            if not isinstance(cantHembras, int):
+            if not isinstance(cantHembras, int): #isinstance devuelve True o False
                 raise TypeError("El valor debe ser un número entero.")
             
             # 2. Verifica si el valor es negativo
@@ -28,5 +28,7 @@ class Especie:
         except Exception as e:
             print(f"Error inesperado: {e}")
 
-    def mostrar(self) -> None:
-        print(f"Especie: {self.__nombre}, Machos: {self.__machos}, Hembras: {self.__hembras}")
+    def toString(self) -> None:
+        print(f"Especie: {self.__nombre}, Machos: {self.__machos}, Hembras: {self.__hembras}.")
+
+    
