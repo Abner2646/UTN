@@ -136,7 +136,8 @@ class Fecha:
             return True
         else:
             return False
-        
+
+
     def toString(self) -> str:
         return f"Día: {self.__dia}, Mes: {self.__mes}, Año: {self.__año}."
     

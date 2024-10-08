@@ -1,3 +1,16 @@
+'''Un organizador de eventos nos pide diseñar un sistema simple para gestionar los
+eventos. El sistema debe permitir registrar eventos, participantes y organizadores, y
+asignar participantes a eventos y organizadores a eventos.
+Requerimientos
+Evento: Cada evento tiene un nombre, una fecha y una descripción. Los eventos
+pueden tener múltiples participantes y un organizador asignado.
+Participante: Cada participante tiene un nombre, una dirección de correo electrónico
+y un número de teléfono. Los participantes pueden registrarse en uno o más
+eventos.
+Organizador: Cada organizador tiene un nombre, una dirección de correo electrónico
+y una especialidad (por ejemplo, planificación de eventos, catering, músico, DJ, etc.).
+Cada organizador puede estar a cargo de uno o más eventos.'''
+
 class Fecha:
     __DIAS_X_MES = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] #Dias de cada mes año NO bisiesto
     __DIAS_X_MES_B = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] #Dias de cada mes año bisiesto
@@ -140,126 +153,120 @@ class Fecha:
     def toString(self) -> str:
         return f"Día: {self.__dia}, Mes: {self.__mes}, Año: {self.__año}."
 
-class Libro:
-    def __init__ (self, nombre:str, autor:str, editorial:str, categoria:str):
+class Evento:
+    '''Cada evento tiene un nombre, una fecha y una descripción. Los eventos
+    pueden tener múltiples participantes y un organizador asignado.'''
+    def __init__(self, nombre:str, fecha:'Fecha', descripcion:str) -> None:
         self.__nombre = nombre
-        self.__autor = autor
-        self.__editorial = editorial
-        self.__categoria = categoria
-
-    def obtenerNombre(self) -> str:
-        return self.__nombre
-    
-    def obtenerAutor(self) -> str:
-        return self.__autor
-    
-    def obtenerEditorial(self) -> str:
-        return self.__editorial
-    
-    def obtenerCategoria(self) -> str:
-        return self.__categoria
-    
-    def toString(self) -> str:
-        return f"Nombre: {self.__nombre}, Autor: {self.__autor}, Editorial: {self.__editorial}, Categoria: {self.__categoria}."
-    
-class Socio:
-    def __init__(self, nombre:str, nacimiento:'Fecha') -> None:
-        self.__nombre = nombre
-        self.__fechaNacimiento = nacimiento
-    
-    #SETTERS
-    def establecerNombre(self, nombre:str) -> None:
-        self.__nombre = nombre
-
-    def establecerFechaNacimiento (self, fecha:'Fecha') -> None:
-        self.__fechaNacimiento = fecha
-
-    def establecerPenalizacion (self, fechaHasta:'Fecha') -> None:
-        self.__fechaPenalizacion = fechaHasta
-
-
-    #GETTERS:
-    def estaHabilitado (self, fecha:'Fecha') -> bool:
-        '''retorna True cuando no tiene
-        fechaPenalizacion o cuando ésta es anterior a la fecha recibida en el
-        parámetro.'''
-        if self.__fechaPenalizacion == None or self.__fechaPenalizacion < fecha:
-            return True
-        else:
-            return False
-
-    def obtenerNombre(self) -> str:
-        return self.__nombre
-    
-    def obtenerFechaNacimiento(self) -> 'Fecha':
-        return self.__fechaNacimiento
-    
-    def obtenerFechaPenalizacion(self) -> 'Fecha':
-        '''Devuelve la fecha hasta la que está penalizado.'''
-        return self.__fechaPenalizacion
-
-    def toString(self) -> str:
-        return f"Nombre: {self.__nombre}, Fecha Nacimiento: {self.__fechaNacimiento}, Penalizado hasta: {self.__fechaPenalizacion}."
-    
-class Prestamo:
-    def __init__(self, libro:'Libro', fechaPrestamo:'Fecha', cantDias:int, socio:'Socio') -> None:
-        self.__libro = libro
-        self.__socio = socio
-        self.__fechaPrestamo = fechaPrestamo
-        self.__dias = cantDias
-        self.__fechaDevolucion = None
+        self.__fecha = fecha
+        self.__descripcion = descripcion
+        self.__participantes = []
 
     #SETTERS
-    def establecerFechaDevolucion(self, fechaDev:'Fecha'): #!!
-        '''recibe como parámetro la fecha en la que
-        efectivamente se realizó la devolución del libro, y controla si el socio debe
-        recibir una penalización, en caso afirmativo se le asigna al socio la fecha de
-        penalización.'''
+    def asignarOrganizador(self, oganizador:'Organizador') -> None:
+        self.__organizador = Organizador
+
+    def asignarParticipante(self, participante:'Participante') -> None:
+        self.__participantes.append(participante)
+
+    def obtenerNombre(self):
+        return self.__nombre
+    
+    def mostrarParticipantes(self):
+        return [participante.obtenerNombre() for participante in self.__participantes]
+
+class Participante:
+    '''Cada participante tiene un nombre y un DNI. Los participantes pueden registrarse en uno o más
+    eventos.'''
+    def __init__(self, nombre:str, dni:int) -> None:
+        self.__nombre = nombre
+        self.__dni = dni
+        self.__eventos = []
+
+    #SETTER
+    def agregarEvento(self, evento:'Evento') -> None:
+        self.__eventos.append(evento)
 
     #GETTERS
-    def obtenerLibro(self) -> 'Libro':
-        return self.__libro
+    def obtenerNombre(self) -> None:
+        return self.__nombre
     
-    def obtenerFechaPrestamo(self) -> 'Fecha':
-        '''Retorna la fecha en la ques e hizo el prestamos.'''
-        return self.__fechaPrestamo
-    
-    def obtenerFechaDevolucion(self) ->'Fecha':
-        '''retorna la fecha en la que efectivamente se realizó la devolución del libro'''
-        return self.__fechaDevolucion
-    def estaAtrasado (self, fecha:'Fecha') -> bool:
-        ''' recibe como parámetro la fecha actual y retorna verdadero si el
-        libro no se devolvió y ya debería haberse devuelto de acuerdo a la fecha de
-        préstamo y la cantidad de días'''
-        if fecha.esAnterior(self.__fechaDevolucion):
-            return True
-        else:
-            return False
+    def eventos(self): #!!
+        '''Retorna los eventos en los que está este participante.'''
+        return [evento.obtenerNombre() for evento in self.__eventos]
 
-    def penalizacion(self) -> 'Fecha': #!!??
-        '''calcula la cantidad de días de penalización y devuelve la fecha
-        hasta la que corresponde aplicar la penalización, a partir de la fecha de
-        devolución, que tiene que estar ligada. La penalización es de 3 días si se
-        atrasó menos de una semana, 5 días si se atrasó menos de tres semanas y
-        10 días si se atrasó 3 semanas o más. Si el libro tiene categoría A los días de
-        penalización se duplican.
-        A. Implemente el diagrama completo.
-        B. Implemente una clase tester para verificar los servicios de la clase Préstamo,
-        algunos casos con valores fijos y otros casos pidiendo datos al usuario.'''
+class Organizador:
+    '''Cada organizador tiene un nombre y un DNI.
+    Cada organizador puede estar a cargo de uno o más eventos.'''
+    def __init__(self, nombre:str, dni:int) -> None:
+        self.__nombre = nombre
+        self.__dni = dni
+        self.__eventos = []
 
-    def toString(self) -> str:
-        return f"Libro: {self.__libro}, Socio: {self.__socio}, Fecha Prestamo: {self.__fechaPrestamo}, Fecha Devolucion: {self.obtenerFechaDevolucion()}"
-    
+    #SETTERS
+    def agregarEvento(self, evento:'Evento') -> None:
+        self.__eventos.append(evento)
+
+    #GETTERS
+    def obtenerEventos(self): #
+        '''Retorna los eventos que tiene a cargo el organizador.'''
+        return [evento.obtenerNombre() for evento in self.__eventos]
+
 class Tester:
-    def testerx():
-        fechaPrestamo = Fecha (1,1,2024)
-        fechaDevolucion = Fecha(1, 1, 2024)
-        Libro1 = Libro ("El principito", "Antoine", "Estampa", "A")
-        Socio1 = Socio ("Abner", fechaPrestamo, fechaDevolucion, )
-        Prestamo1 = Prestamo(Libro1, )
+    def testerTodo():
+        # Creo los objetos
+        Fecha1 = Fecha(1,1,2024)
+        Fecha2 = Fecha(2,2,2024)
+        Fecha3 = Fecha(25,12,2024)
 
+        E1 = Evento("Cumpleanios", Fecha1, "Descrip...")
+        E2 = Evento("Casamiento", Fecha2, "Descrip...")
+        E3 = Evento("Navidad", Fecha3, "Descrip...")
 
+        P1 = Participante("Abner", 44110066)
+        P2 = Participante("Juan", 44110067)
+        P3 = Participante("Pedro", 44110068)
+
+        O1 = Organizador("Messi", 10101010)
+        O2 = Organizador("CR7", 11111111)
+        O3 = Organizador("Ronaldo", 12121212)
+        print("Se crearon los objetos correctamente :)")
+
+        # Agregar participantes a los eventos
+        E1.asignarParticipante(P1)
+        E1.asignarParticipante(P2)
+        E1.asignarParticipante(P3)
+        E2.asignarParticipante(P1)
+        E2.asignarParticipante(P2)
+        E3.asignarParticipante(P1)
+        print("Se añadieron los participantes a los eventos correctamente :)")
+
+        # Agregar eventos a los participantes
+        P1.agregarEvento(E1)
+        P2.agregarEvento(E1)
+        P3.agregarEvento(E1)
+        P1.agregarEvento(E2)
+        P2.agregarEvento(E2)
+        P1.agregarEvento(E3)
+        print("Se añadieron los eventos a los participantes correctamente :)")
+
+        # Agregar eventos a los organizadores
+        O1.agregarEvento(E1)
+        O2.agregarEvento(E1)
+        O3.agregarEvento(E1)
+        O1.agregarEvento(E2)
+        O2.agregarEvento(E2)
+        O1.agregarEvento(E3)
+        print("Se añadieron los eventos a los organizadores correctamente :)")
+
+        # Mostrar los eventos en los que está el participante 1 (P1)
+        print(P1.eventos())
+
+        # Mostrar los eventos que tiene un organizador
+        print(f"Eventos del organizador 1: {O1.obtenerEventos()}")
+
+        # Mostrar los participantes que tiene un evento (E1)
+        print(f"Mostrar participantes del evento E1: {E1.mostrarParticipantes()}")
 
 if __name__ == "__main__":
-    Tester.testerx()
-    
+    Tester.testerTodo()
