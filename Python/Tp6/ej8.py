@@ -255,7 +255,7 @@ class Tester:
         O2.agregarEvento(E1)
         O3.agregarEvento(E1)
         O1.agregarEvento(E2)
-        O2.agregarEvento(E2)
+        O2.agregarEvento(E3)
         O1.agregarEvento(E3)
         print("Se añadieron los eventos a los organizadores correctamente :)")
 
