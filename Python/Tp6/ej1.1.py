@@ -219,4 +219,13 @@ class Prestamo:
     def obtenerFechaPrestamo(self) -> 'Fecha':
         return self.__fechaPrestamos
     
-    def 
+    def obtenerFechaDevolucion(self) -> 'Fecha':
+        ''' retorna la fecha en la que efectivamente se realizó
+        la devolución del libro'''
+        return self.__fechaDevolucion
+    
+    def estaAtrasado(sefl, fecha:'Fecha') -> bool:
+        '''recibe como parámetro la fecha actual y retorna verdadero si el
+        libro no se devolvió y ya debería haberse devuelto de acuerdo a la fecha de
+        préstamo y la cantidad de días'''
+        pass
