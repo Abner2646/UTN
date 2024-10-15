@@ -1,4 +1,4 @@
-class Cancion:
+class Cancion: #LISTO
     def __init__(self, codigo:int, nombre:str, duracion:int, genero:str) -> None:
         self.__codigo = codigo
         self.__nombre = nombre
@@ -52,20 +52,28 @@ class Suscripcion: #!!
         self._email = email
         self._telefono = telefono
         self.__pais = pais
+        self.__misPlaylists = []
 
-    def crearPlaylist(self, nombrePlaylist:str): #Debería crear un objeto de tipo Lista dentro de una lista de Listas
-        
+    #SETTERS:
+    def crearPlaylist(self, nombrePlaylist: str):
+        nueva_playlist = Playlist(nombrePlaylist)  # Crea un objeto Playlist
+        self.__misPlaylists.append(nueva_playlist)  # Añade la nueva playlist a la lista
+
+    def agregarCancionPlaylist(self, playlist:'Playlist', cancion:'Cancion'):
+        if playlist in self.__misPlaylists:
+            playlist.agregarCancion(cancion)
+
+    #GETTERS:
+    def obtenerPlaylists(self) -> list:
+        pass
 
     def reproducirMusica(self): #Si se cumple X condición hace algo
         pass
 
     def reproducirCancion(self): 
-
-
-    def agregarCancionPlaylist():
         pass
 
-class SuscripcionGratuita(Suscripcion): #LISTO
+class SuscripcionGratuita(Suscripcion):
     def __init__(self, nombre:str, email:str, telefono:str, pais:'Pais'):
         super().__init__ (nombre, email, telefono, pais)
         self.__tiempoSinPublicidad = 0
