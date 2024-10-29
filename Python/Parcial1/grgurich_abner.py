@@ -94,7 +94,7 @@ class Clase(ABC):
             raise TypeError("La hora de inicio debe ser un string")
         if not isinstance(horaFin, str):
             raise TypeError("La hora de fin debe ser un string")
-        if not isinstance(precio, float):
+        if not isinstance(precio, (float, int)) or precio < 0:
             raise TypeError("El precio debe ser un número decimal")
 
         self._nombre = nombre
