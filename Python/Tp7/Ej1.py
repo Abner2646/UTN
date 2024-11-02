@@ -75,7 +75,7 @@ class Tester:
         print(f"Antes de eliminar, costo total: {self.aseguradora.costoTotal()}")
         self.aseguradora.eliminar(poliza1)
         print(f"Después de eliminar póliza 1, costo total: {self.aseguradora.costoTotal()}")
-    
+        
     def probarExistePoliza(self):
         print("\nProbando existencia de pólizas...")
         poliza1 = PolizaInmueble(1, 1000, 500, 200)
