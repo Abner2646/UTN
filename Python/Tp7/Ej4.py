@@ -99,3 +99,4 @@ class SuscripcionPaga(Suscripcion):
     
     def dispositivos(self) -> list: #!!
         pass
+        
