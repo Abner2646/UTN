@@ -140,4 +140,3 @@ class Fecha:
 
     def toString(self) -> str:
         return f"Día: {self.__dia}, Mes: {self.__mes}, Año: {self.__año}."
-    
