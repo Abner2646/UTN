@@ -44,15 +44,6 @@ class Libro:
 
 
 class Tester:
-    @staticmethod
-    def test():
-        #Carga los datos del JSON en objetos de clase Libro
-
-
-        #muestra por pantalla valores de los objetos de clase Libro.
-
-
-class Tester:
     def cargarMostrar(self, libros_json):
             with open(libros_json, "r" ,encoding="utf-8") as archivo: #Lee "libros.json" y lo llama archivo | "archivo es de tipo json"
                 data = json.load(archivo) #Carga el archivo en una variable "data" | "data" es de tipo diccionario
@@ -72,7 +63,7 @@ class Tester:
                 if 'año' in i and i['año'] == año:
                     print(i)
                 
-if _name_ == "_main_":
+if __name__ == "__main__":
     libros_json = "c:/Users/AMDRYZEN7/Desktop/Programacion 2/PRACTICA/tp8/punto 1/libros.json"
-    Tester().cargarMostrar(libros_json)
-    Tester().buscarXaño(libros_json)
+    Tester.cargarMostrar()
+    Tester.buscarXaño()

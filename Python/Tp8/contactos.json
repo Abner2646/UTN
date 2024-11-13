@@ -1,0 +1,23 @@
+[
+    {
+        "nombre": "Abner",
+        "apellido": "Grgurich",
+        "telefono": "291",
+        "mail": "a@gmail",
+        "direccion": "9 de Julio"
+    },
+    {
+        "nombre": "Maria",
+        "apellido": "Sanzio",
+        "telefono": "351",
+        "mail": "m@hotmail",
+        "direccion": "Av. Del Libertador"
+    },
+    {
+        "nombre": "Pedro",
+        "apellido": "Peralta",
+        "telefono": "421",
+        "mail": "p@outlook",
+        "direccion": "Santa Fe"
+    }
+]
