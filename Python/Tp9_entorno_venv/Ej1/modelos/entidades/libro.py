@@ -2,7 +2,7 @@
 
 class Libro:
     @staticmethod
-    def fromDic(self, data:dict) -> Libro:
+    def fromDic(cls, data:dict) -> Libro:
         return Libro(data["titulo"], data["autor"], data["genero"], data["anio"], data["isbnos"])
 
 
