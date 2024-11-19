@@ -1,110 +1,59 @@
-#Path: modelos/repositorios
+import json #E
+from modelos.entidades.libro import Libro
 
-'''Crear los archivos que gestionen las
-colecciones de objetos de las clases declaradas en el punto anterior. Son las
-clases que cargan los datos en memoria y gestionan los datos almacenados en
-los archivos, y el archivo “repositorios.py” que declara una variable para cada
-clase de repositorio y contiene una función que se encarga de inicializar los
-repositorios en esas variables cuando inicia la aplicación.'''
+class RepositorioLibros():
+    ruta_json = r'C:/Users/Abner/Desktop/UTN1/Python/Tp9_entorno_venv/Ej1/datos/libros.json' ##!!??
 
-#from modelos.entidades.libro import Libro
-#Clase añadida manualmente porque no me la dejaba importar
-class Libro:
-    @staticmethod
-    def fromDic(cls, data:dict) -> Libro:
-        return Libro(data["titulo"], data["autor"], data["genero"], data["anio"], data["isbnos"])
+    def __init__(self): #Esto queda estandarizado
+        self.lista = []
+        self.cargar_todos()
 
+    def cargar_todos(self):
+        try:
+            with open(self.ruta_json, "r", encoding='utf-8') as archivo:
+                libros = json.load(archivo) #Ojo con el nombre de la variable
+                for libro in libros: #Ojo con el nombre de la variable
+                    self.lista.append(Libro.fromDic(libro)) #Ojo con el nombre de la Clase
+        except FileNotFoundError:
+            return []
 
-    def __init__(self, titulo:str, autor:str, genero:str, anio:int, isbn:int):
-        self.__titulo = titulo
-        self.__autor = autor
-        self.__genero = genero
-        self.__anio = anio
-        self.__isbn = isbn
+    def guardar_todos(self):
+        lista = [libro.to_dict() for libro in self.lista] #Las dos variables iguales
+        with open(self.ruta_json, "w") as archivo:
+            json.dump(lista, archivo)
+
+    def obtener_todos(self):
+        return self.lista
+    
+    def existe(self, isbn: int) -> bool:
+        return any(libro.obtenerISBN() == isbn for libro in self.lista)
 
     
-    #Consultar triviales:
-    def obtenerTitulo(self):
-        return self.__titulo
+    def existeISBN(self, ISBN:int) -> bool:
+        for libro in self.lista:
+            if libro.isbn == ISBN:
+                return True
+        return False
     
-    def obtenerAutor(self):
-        return self.__autor
-    
-    def obtenerGenero(self):
-        return self.__genero
-    
-    def obtenerAnio(self):
-        return self.__anio
-    
-    def obtenerISBN(self):
-        return self.__isbn
+    def agregar(self, libro:'Libro'):
+        if self.existe(libro):
+            raise Exception("El libro ya existe") #Ojo con los comentarios
+        self.lista.append(libro)
+        self.guardar_todos()
 
+    def eliminar(self, libro:'Libro'):
+        if not self.existe(libro):
+            raise Exception("El socio no existe")
+        self.lista.remove(libro)
+        self.guardar_todos()
 
-    #Comandos triviales:
-    def establecerNombre(self, titulo:str):
-        self.__titulo = titulo
-
-    def establecerAutor(self, autor:str):
-        self.__autor = autor
-
-    def establecerGenero(self, genero:str):
-        self.__genero = genero
-
-    def establecerAnio(self, anio:int):
-        self.__anio = anio
-
-    def establecerISBN(self, isbn:int):
-        self.__isbn = isbn
-
-    #Otros metodos:
-    def esIgual(self, otro:'Libro') -> bool:
-        return self.__titulo == otro.__titulo and self.__autor == otro.__autor and self.__genero == otro.__genero and self.__anio == otro.__anio and self.__isbn == otro.__isbn
-
-    def toString(self) -> str:
-        return f"Libro: {self.__titulo}, Autor: {self.__autor}, Genero: {self.__genero}, Año: {self.__anio}, ISBN: {self.__isbn}"
-
-    def toDic(self) -> dict:
-        return {
-            "titulo": self.__titulo,
-            "autor": self.__autor,
-            "genero": self.__genero,
-            "anio": self.__anio,
-            "isbnos": self.__isbn
-        }
-
-
-class RepositorioLibros:
-    __libros__ = []
-
-    def __init__(self):
-        pass
-
-    def repositorioLibro(self):
-        pass
-
-    #-
-    def cargarTodos(self):
-        pass
-
-    #-
-    def guardarTodos(self):
-        pass
-
-    def obtenerTodos(self) -> list:
-        pass
-
-    def existe(self, libro:'Libro') -> bool:
-        pass
-
-    def existeISBN(slef, isbn:int) -> bool:
-        pass
-    
-    def agregarNuevo(self, nuevoLibro:'Libro'):
-        pass
-
-    def modificarPorISBN(self, isbn:int, titulo:str, autor:str, genero:str, anio:int):
-        pass
-
-    def eliminarPorISBN(self, isbn:int):
-        pass
-
+    def modificar(self, isbn:int, titulo:str, autor:str, genero:str, anio_publicacion:int, cantidad_ejemplares:int):
+        for libro in self.lista:
+            if libro.obtenerISBN == isbn:
+                libro.titulo = titulo
+                libro.autor = autor
+                libro.genero = genero
+                libro.anio_publicacion = anio_publicacion
+                libro.cantidad_ejemplares = cantidad_ejemplares
+                self.guardar_todos()
+                return

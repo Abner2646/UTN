@@ -1,65 +1,96 @@
-#Path: modelos/entidades
-
 class Libro:
-    @staticmethod
-    def fromDic(cls, data:dict) -> Libro:
-        return Libro(data["titulo"], data["autor"], data["genero"], data["anio"], data["isbnos"])
+    def __init__(self, isbn: int, titulo: str, autor: str, genero: str, anio_publicacion: int, cantidad_ejemplares: int):
+        if not isinstance(isbn, int):
+            raise ValueError("ISBN debe ser un entero.")
+        if not isinstance(titulo, str):
+            raise ValueError("Título debe ser una cadena.")
+        if not isinstance(autor, str):
+            raise ValueError("Autor debe ser una cadena.")
+        if not isinstance(genero, str):
+            raise ValueError("Género debe ser una cadena.")
+        if not isinstance(anio_publicacion, int):
+            raise ValueError("Año de publicación debe ser un entero.")
+        
+        self.isbn = isbn
+        self.titulo = titulo
+        self.autor = autor
+        self.genero = genero
+        self.anio_publicacion = anio_publicacion
+        self.cantidad_ejemplares = 0
 
-
-    def __init__(self, titulo:str, autor:str, genero:str, anio:int, isbn:int):
-        self.__titulo = titulo
-        self.__autor = autor
-        self.__genero = genero
-        self.__anio = anio
-        self.__isbn = isbn
-
+    # Getters:
+    def obtenerISBN(self) -> int:
+        return self.isbn
     
-    #Consultar triviales:
-    def obtenerTitulo(self):
-        return self.__titulo
+    def obtenerTitulo(self) -> str:
+        return self.titulo
     
-    def obtenerAutor(self):
-        return self.__autor
+    def obtenerAutor(self) -> str:
+        return self.autor
     
-    def obtenerGenero(self):
-        return self.__genero
+    def obtenerGenero(self) -> str:
+        return self.genero
     
-    def obtenerAnio(self):
-        return self.__anio
+    def obtenerAnioPublicacion(self) -> int:
+        return self.anio_publicacion
     
-    def obtenerISBN(self):
-        return self.__isbn
+    def obtenerCantidadEjemplares(self) -> int:
+        return self.cantidad_ejemplares
+    
+    # Setters:
+    def establecerISBN(self, isbn: int):
+        if not isinstance(isbn, int):
+            raise ValueError("ISBN debe ser un entero.")
+        self.isbn = isbn
 
+    def establecerTitulo(self, titulo: str):
+        if not isinstance(titulo, str):
+            raise ValueError("Título debe ser una cadena.")
+        self.titulo = titulo
 
-    #Comandos triviales:
-    def establecerNombre(self, titulo:str):
-        self.__titulo = titulo
+    def establecerAutor(self, autor: str):
+        if not isinstance(autor, str):
+            raise ValueError("Autor debe ser una cadena.")
+        self.autor = autor
 
-    def establecerAutor(self, autor:str):
-        self.__autor = autor
+    def establecerGenero(self, genero: str):
+        if not isinstance(genero, str):
+            raise ValueError("Género debe ser una cadena.")
+        self.genero = genero
 
-    def establecerGenero(self, genero:str):
-        self.__genero = genero
+    def establecerAnioPublicacion(self, anio_publicacion: int):
+        if not isinstance(anio_publicacion, int):
+            raise ValueError("Año de publicación debe ser un entero.")
+        self.anio_publicacion = anio_publicacion
 
-    def establecerAnio(self, anio:int):
-        self.__anio = anio
+    def establecerCantidadEjemplares(self, cantidad_ejemplares: int):
+        if not isinstance(cantidad_ejemplares, int):
+            raise ValueError("Cantidad de ejemplares debe ser un entero.")
+        self.cantidad_ejemplares = cantidad_ejemplares
 
-    def establecerISBN(self, isbn:int):
-        self.__isbn = isbn
+    @classmethod
+    def fromDic(cls, dic: dict) -> 'Libro':
+        return cls(
+            dic['isbn'],
+            dic['titulo'],
+            dic['autor'],
+            dic['genero'],
+            dic['anio_publicacion'],
+            dic['cantidad_ejemplares']
+        )
 
-    #Otros metodos:
-    def esIgual(self, otro:'Libro') -> bool:
-        return self.__titulo == otro.__titulo and self.__autor == otro.__autor and self.__genero == otro.__genero and self.__anio == otro.__anio and self.__isbn == otro.__isbn
-
-    def toString(self) -> str:
-        return f"Libro: {self.__titulo}, Autor: {self.__autor}, Genero: {self.__genero}, Año: {self.__anio}, ISBN: {self.__isbn}"
-
-    def toDic(self) -> dict:
+    def __str__(self) -> str:
+        return f"Libro(ISBN: {self.isbn}, Título: {self.titulo}, Autor: {self.autor}, Género: {self.genero}, Año de Publicación: {self.anio_publicacion}, Cantidad de Ejemplares: {self.cantidad_ejemplares})"
+    
+    def to_dict(self) -> dict:
         return {
-            "titulo": self.__titulo,
-            "autor": self.__autor,
-            "genero": self.__genero,
-            "anio": self.__anio,
-            "isbnos": self.__isbn
+            'isbn': self.isbn,
+            'titulo': self.titulo,
+            'autor': self.autor,
+            'genero': self.genero,
+            'anio_publicacion': self.anio_publicacion,
+            'cantidad_ejemplares': self.cantidad_ejemplares
         }
-
+    
+    def esIgual(self, otro):
+        return self.isbn == otro.isbn
