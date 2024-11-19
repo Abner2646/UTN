@@ -1,4 +1,4 @@
-from modelos.entidades.temax import Temax
+#from modelos.entidades.temax import Temax
 from .alumno import Alumno
 from .tema import Tema
 
