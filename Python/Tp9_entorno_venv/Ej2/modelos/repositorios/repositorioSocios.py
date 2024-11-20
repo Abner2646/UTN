@@ -46,10 +46,12 @@ class RepositorioSocios:
                 socio.mail = mail
                 socio.fecha_nacimiento = fecha_nacimiento
                 self.guardarTodos()
+                break
 
     def eliminarPorDni(self, dni:int):
         for socio in self.socios:
             if socio.dni == dni:
                 self.socios.remove(socio)
                 self.guardarTodos()
+                break
 
