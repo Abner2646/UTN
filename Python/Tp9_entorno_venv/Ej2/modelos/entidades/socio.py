@@ -2,7 +2,7 @@ from datetime import datetime
 
 class Socio:
     @classmethod
-    def fromDiccionario(self, dic:dict) -> 'Socio':
+    def fromDiccionario(cls, dic:dict) -> 'Socio':
         return Socio(dic['dni'], dic['nombre'], dic['apellido'], dic['mail'], dic['fecha_nacimiento'])
 
     def __init__(self, dni:int, nombre:str, apellido:str, mail:str, fecha_nacimiento:'datetime'):

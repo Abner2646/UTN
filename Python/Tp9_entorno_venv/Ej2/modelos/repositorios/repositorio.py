@@ -1,9 +1,9 @@
-from modelos.repositorios.repositorio_prestamo import LaClase #!!
+from modelos.repositorios.repositorioSocios import RepositorioSocios
 
 repositorio = None
 
 def crear_repositorio():
     global repositorio
     if repositorio is None:
-        repositorio = Repositorio_de_clase_creada_anteriormente() #!!
+        repositorio = RepositorioSocios #!!
     return repositorio
