@@ -6,3 +6,4 @@ app.register_blueprint(bp_socio) #Cambiar esto por bp_loQCorresponda
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
