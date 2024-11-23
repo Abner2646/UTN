@@ -8,7 +8,7 @@ En la clase tester:
 a. Carga los datos del JSON en objetos de clase Libro y muestra por pantalla valores
 de los objetos de clase Libro.
 b. Pedile al usuario un año de publicación para buscar todos los libros publicados ese
-año, y mostrá por pantalla los resultados de la búsqueda.  '''
+año, y mostrá por pantalla los resultados de la búsqueda. '''
 
 import json
 
