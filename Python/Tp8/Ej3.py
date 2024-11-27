@@ -17,7 +17,7 @@ alojamiento y el tipo de pensión (entre las opciones: desayuno, media pensión,
 completa). Los hoteles se identifican mediante el nombre y la ciudad donde se encuentran
 ubicados.
 4. Transporte: Los paquetes turísticos incluyen el tipo de transporte que se utilizará (por
-ejemplo, avión, colectivo) para ir y volver del destino turístico. '''
+ejemplo, avión, colectivo) para ir y volver del destino turístico.'''
 
 class ParqueteGrupal:
     #almacenar, actualizar y visualizar la información de cada destino, el tipo de viaje, el alojamiento y el medio de transporte
