@@ -8,7 +8,7 @@ b. Guarda esa lista completa en un archivo JSON “contactos.json”.
 c. En una nueva lista vacía almacena los objetos reconstruidos a partir del archivo
 JSON.
 d. Pedile al usuario una letra para buscar los contactos cuyo apellido comienza con esa
-letra, y mostrá el resultado de la búsqueda por pantalla.   '''
+letra, y mostrá el resultado de la búsqueda por pantalla.'''
 
 import json
 
