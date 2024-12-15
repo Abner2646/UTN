@@ -2,7 +2,7 @@
 de gestión de viajes para organizar y ofrecer paquetes turísticos grupales a sus clientes. La
 agencia requiere almacenar, actualizar y visualizar la información de cada destino, el tipo de
 viaje, el alojamiento y el medio de transporte para cada paquete turístico.
-Requerimientos :
+Requerimientos:
 1. Paquete grupal: Cada paquete de viaje grupal tiene una ciudad, fechas de ida y vuelta, una
 descripción del viaje, un tipo de viaje (entre las opciones: turismo, educativo o aventura), y
 un precio. También se debe mantener información sobre el cupo máximo y el cupo actual de
