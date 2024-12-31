@@ -1,4 +1,4 @@
-'''Una agencia de viajes especializada en destinos turísticos de Argentina necesita un sistema
+''' Una agencia de viajes especializada en destinos turísticos de Argentina necesita un sistema
 de gestión de viajes para organizar y ofrecer paquetes turísticos grupales a sus clientes. La
 agencia requiere almacenar, actualizar y visualizar la información de cada destino, el tipo de
 viaje, el alojamiento y el medio de transporte para cada paquete turístico.
