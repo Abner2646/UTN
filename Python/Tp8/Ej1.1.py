@@ -1,4 +1,4 @@
-''' Crea una clase Libro que contenga los atributos de tipo elemental (titulo, autor y género de
+'''Crea una clase Libro que contenga los atributos de tipo elemental (titulo, autor y género de
 tipo string, año de publicación e ISBN de tipo entero) y que contenga métodos para
 serializar/deserializar el objeto utilizando los métodos toDiccionario() y fromDiccionario(dic:
 dict) vistos en clase.
