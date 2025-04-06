@@ -1,4 +1,4 @@
-'''Crea una clase Contacto que permita gestionar la información de los contactos (nombre,
+''' Crea una clase Contacto que permita gestionar la información de los contactos (nombre,
 apellido, teléfono, correo electrónico y dirección, todo en formato string). En la clase
 implementa los métodos para serializar/deserializar el objeto utilizando los métodos
 toDiccionario() y fromDiccionario(dic: dict) vistos en clase.
